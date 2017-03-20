@@ -25,7 +25,9 @@ module.exports = function (content, sourceMap) {
 
   var keys = Object.keys(modules);
   keys.forEach(function (mod) {
-    exports.push("window[" + JSON.stringify(mod) + "] = (" + mod + ");");
+    var globalProp = "window[" + JSON.stringify(mod) + "]";
+    exports.push("if (!" + globalProp + ") {" + globalProp + " = {}};" +
+        "for (prop in " + mod + ") {if (" + mod + ".hasOwnProperty(prop)) {" + globalProp + "[prop] = " + mod + "[prop]}};")
   });
 
   if (sourceMap) {
