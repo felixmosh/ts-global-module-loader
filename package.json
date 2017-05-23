@@ -1,6 +1,6 @@
 {
   "name": "ts-global-module-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Felix Mosheev",
   "description": "exports loader module for webpack",
   "dependencies": {
