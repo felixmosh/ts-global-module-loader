@@ -24,8 +24,17 @@ var services;
 ``` javascript
 require("ts-global-module-loader?./file.js");
 ```
-will adds below code the the file's source:
+will modify the code file's source to:
 ``` javascript
+var services = window["services"];
+(function (services) {
+    var Foo = (function () {
+        function Foo() {
+        }
+        return Foo;
+    }());
+    services.Foo = Foo;
+})(services || (services = {}));
 window["services"] = (services);
 ```
 Inspired by https://github.com/webpack/exports-loader;
