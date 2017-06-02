@@ -23,6 +23,8 @@ module.exports = function (content, sourceMap) {
   var exports = [];
   var modules = getTsModules(content);
 
+  content = content.replace(/(^[var]+)\s([\w]+)([\;])/g, '$1 $2 = window["$2"]$3');
+
   var keys = Object.keys(modules);
   keys.forEach(function (mod) {
     var globalProp = "window[" + JSON.stringify(mod) + "]";
