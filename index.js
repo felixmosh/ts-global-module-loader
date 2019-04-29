@@ -29,7 +29,7 @@ module.exports = function (content, sourceMap) {
   keys.forEach(function (mod) {
     var globalProp = "window[" + JSON.stringify(mod) + "]";
     exports.push("if (!" + globalProp + ") {" + globalProp + " = {}};" +
-        "for (prop in " + mod + ") {if (" + mod + ".hasOwnProperty(prop)) {" + globalProp + "[prop] = " + mod + "[prop]}};")
+        "for (var prop in " + mod + ") {if (" + mod + ".hasOwnProperty(prop)) {" + globalProp + "[prop] = " + mod + "[prop]}};")
   });
 
   if (sourceMap) {
